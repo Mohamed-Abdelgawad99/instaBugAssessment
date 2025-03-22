@@ -3,8 +3,7 @@ package runners;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 import io.cucumber.core.cli.Main;
 import io.cucumber.junit.Cucumber;
@@ -23,7 +22,7 @@ public class TestRunner {
             String testingType = properties.getProperty("AutomationTestType");
             String featureFile = properties.getProperty("featureFile");
             String scenarioTag = properties.getProperty("testCaseID");
-//            System.out.println(testingType);
+
 
             if (Objects.equals(featureFile, "") || Objects.equals(scenarioTag, "") || Objects.equals(testingType, "")) {
                 System.out.println("Please specify type of testing, feature file, and scenario tag in runner.properties.");
@@ -52,16 +51,18 @@ public class TestRunner {
             }
 
             // Pass feature, glue, and tags dynamically to Cucumber CLI
-            String[] cucumberOptions = new String[]{
+            List<String> cucumberOptions = new ArrayList<>(Arrays.asList(
                     "--plugin", "pretty",
-                    "--plugin", "html:target/cucumber-reports",
+                    "--plugin", "html:target/cucumber-reports.html",
                     "--plugin", "json:target/cucumber.json",
                     "--plugin", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
                     "--glue", stepDefFiles,
+                    "--glue", "hooks",
                     featureFilePath + featureFile + ".feature",
                     "--tags", "@" + scenarioTag
-            };
-            Main.main(cucumberOptions);
+            ));
+            String[] newCucumberOptions = cucumberOptions.toArray(new String[0]);
+            Main.main(newCucumberOptions);
 
         }
         catch (IOException e) {

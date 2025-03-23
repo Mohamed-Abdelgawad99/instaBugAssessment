@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 import io.cucumber.core.cli.Main;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
+
 
 
 
@@ -22,6 +20,7 @@ public class TestRunner {
             String testingType = properties.getProperty("AutomationTestType");
             String featureFile = properties.getProperty("featureFile");
             String scenarioTag = properties.getProperty("testCaseID");
+            List<String> addOns = null;
 
 
             if (Objects.equals(featureFile, "") || Objects.equals(scenarioTag, "") || Objects.equals(testingType, "")) {
@@ -40,6 +39,9 @@ public class TestRunner {
                 case "webapp":
                     featureFilePath = "src/test/resources/features/webApp/";
                     stepDefFiles = "stepDefinitions.webAppSteps";
+                    addOns = new ArrayList<>();
+                    addOns.add("--glue");
+                    addOns.add("hooks");
                     break;
 
                 case "restapi":
@@ -57,18 +59,42 @@ public class TestRunner {
                     "--plugin", "json:target/cucumber.json",
                     "--plugin", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
                     "--glue", stepDefFiles,
-                    "--glue", "hooks",
                     featureFilePath + featureFile + ".feature",
                     "--tags", "@" + scenarioTag
             ));
+            if (addOns != null){
+                cucumberOptions.addAll(addOns);
+            }
             String[] newCucumberOptions = cucumberOptions.toArray(new String[0]);
-            Main.main(newCucumberOptions);
+            Main.run(newCucumberOptions);
 
+            try {
+                String allurePath = "bin/allure-2.33.0/bin/allure.bat";
+                AllureHistoryHelper.preserveHistory();
+                Process generateReport = new ProcessBuilder(allurePath, "generate", "allure-results", "--clean", "-o", "allure-report")
+                        .inheritIO()
+                        .start();
+                generateReport.waitFor();
+                AllureHistoryHelper.restoreHistory();
+
+                // Open the report
+                Process openReport = new ProcessBuilder(allurePath, "serve", "allure-results")
+                        .inheritIO()
+                        .start();
+                System.out.println("\n✅ Allure report is running.");
+                System.out.println("📂 Opened in your browser from local server.");
+                System.out.println("🛑 Press ENTER to stop the Allure server and exit...");
+
+                System.in.read(); // Wait for user input
+                new ProcessBuilder("taskkill", "/F", "/IM", "java.exe", "/T").start();
+                System.out.println("🚪 Allure server stopped. Goodbye!");
+            } catch (IOException | InterruptedException e) {
+                throw e;
+            }
         }
         catch (IOException e) {
-            throw new RuntimeException("Failed to load runner.properties");
+            throw e;
         }
-
     }
 }
 

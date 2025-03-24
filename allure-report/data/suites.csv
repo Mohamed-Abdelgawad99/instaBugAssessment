@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","61262","Search for laptop products on the E-commerce website","","Mon Mar 24 22:14:37 EET 2025","passed","Mon Mar 24 22:15:38 EET 2025","","E-Commerce Product Search Functionality","Search for laptop products on the E-commerce website",""
+"","2882","Successful login with valid credentials","","Mon Mar 24 22:13:39 EET 2025","broken","Mon Mar 24 22:13:42 EET 2025","","Mobile Login Functionality","Successful login with valid credentials",""
+"","4909","Create a new user and get the correct user data","","Mon Mar 24 22:17:37 EET 2025","passed","Mon Mar 24 22:17:42 EET 2025","","API Testing","Create a new user and get the correct user data",""

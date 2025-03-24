@@ -53,9 +53,9 @@ instabug_model_1_assesment/
 Before running the tests, make sure you have the following installed:
 
 ### ✅ Java & Tools
-- **Java JDK 11+**
+- **Java JDK 22**
 - **Maven**
-- **Node.js + Appium 2.x**
+- **Node.js + Appium 2.17.1**
 - **Android SDK (with platform-tools, emulator, system-images)**
 - **Allure CLI (for report generation)**
 
@@ -80,7 +80,7 @@ Before running the tests, make sure you have the following installed:
 To get started, clone the project locally:
 
 ```bash
-git clone https://github.com/your-username/instabug_model_1_assesment.git
+git clone https://github.com/Mohamed-Abdelgawad99/instaBugAssessment.git
 cd instabug_model_1_assesment
 ```
 

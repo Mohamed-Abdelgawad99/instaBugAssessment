@@ -10,21 +10,13 @@ public class LoginSteps {
 
     private final LoginPage loginPage;
     private final HomePage homePage;
-    private final MobileAppDriverManager appDriverInstance = MobileAppDriverManager.getInstance();
 
-
-    public LoginSteps(){
-        appDriverInstance.launchApp();
+    private LoginSteps(){
         this.loginPage = new LoginPage(MobileAppDriverManager.getInstance().getDriver());
         this.homePage = new HomePage(MobileAppDriverManager.getInstance().getDriver());
     }
 
 
-    @Given("user opens mobile application")
-    public void launchMobileApp(){
-        System.out.println("diver initialization......");
-        appDriverInstance.launchApp();
-    }
 
     @Then("User is redirected to {string} page")
     public void userIsRedirectedTo(String pageName) {

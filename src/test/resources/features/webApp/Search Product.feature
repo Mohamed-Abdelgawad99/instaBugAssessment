@@ -2,7 +2,7 @@ Feature: E-Commerce Product Search Functionality
 
 
   @ID001
-  Scenario:
+  Scenario: Search for laptop products on the E-commerce website
     Given user opens the E-commerce web application
     Then user is redirected to homepage
     When user search for "Laptop" product

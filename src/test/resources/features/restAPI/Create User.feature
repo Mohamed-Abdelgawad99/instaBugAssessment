@@ -5,10 +5,7 @@ Feature: API Testing
     When I send a POST request to "/users" with:
       | name  | John Doe            |
       | email | johndoe@example.com |
-      | id    | 555                 |
-    Then the response status should be 202
+    Then the response status should be 201
     And the response body should contain:
       | name  | John Doe            |
       | email | johndoe@example.com |
-
-#    to generate and run allure reports allure generate -o allure-report then allure serve

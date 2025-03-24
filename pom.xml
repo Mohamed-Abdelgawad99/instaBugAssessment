@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.27.0</version>
+            <version>4.13.0</version>
         </dependency>
 
         <!-- Appium (For Mobile Testing) -->
@@ -61,8 +61,9 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>8.3.0</version>
+            <version>8.5.1</version> <!-- latest as of early 2024 -->
         </dependency>
+
 
 
         <!-- REST Assured (For API Testing) -->

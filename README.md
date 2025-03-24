@@ -441,7 +441,7 @@ caps.setCapability("app", new File("apk-files/your-app.apk").getAbsolutePath());
 Once everything is ready:
 - Emulator is running
 - Appium server is running
-- `runner.properties` is set to `AutomationTestType=mobile`
+- `runner.properties` is set to `AutomationTestType=mobileapp`
 
 Run your test and watch the app in action! 🚀
 
